@@ -1,0 +1,50 @@
+CAGR = 
+VAR Start_Date = 
+    CALCULATE(
+        [Total Visitors],
+        FILTER(
+            DateTable,
+            DateTable[Date].[Year] = MIN(DateTable[Date].[Year])
+        )
+    )
+
+VAR End_Date = 
+    CALCULATE(
+        [Total Visitors],
+        FILTER(
+            DateTable,
+            DateTable[Date].[Year] = MAX(DateTable[Date].[Year])
+        )
+    )
+
+VAR No_of_Years =
+    YEAR(MAX(DateTable[Date])) - YEAR(MIN(DateTable[Date]))
+
+RETURN
+    (End_Date / Start_Date) ^ (1 / No_of_Years) - 1
+
+Follow this directions: 
+Suppose, let's say we are in 2019. (A/c to data)
+
+Projected visitors for 2025 formula:
+Projected visitors = Current visitors x (1 + Annual Growth Rate)^(Number of Years)
+
+The formula for growth rate:
+Annual Growth Rate = [(Ending Value / Beginning Value)^(1 / Number of Years)] - 1
+Here Ending values corresponds to 2019 domestic visitors and the beginning value corresponds to 2016 visitors.
+
+
+For Hyderabad, in 2019, the number of domestic visitors are 1.38 cr.
+If you want, you can take the covid situation into consideration and reduce the growth to 3-4%
+
+
+
+the number of years in the investment period 2016-19 means
+ 2016-17 as 1 year 
+ 2017-18 as 1 year
+and 2018-19 as 1 year.
+So the number of years = 3
+
+
+
+Use 0 for null values
